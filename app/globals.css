@@ -153,6 +153,32 @@ body {
   will-change: transform, opacity;
 }
 
+.portfolio-section-scrollable {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: visible;
+  will-change: transform, opacity;
+}
+
+/* Mobile: Allow sections to expand with content */
+@media (max-width: 768px) {
+  .portfolio-section {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .portfolio-section-scrollable {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto !important;
+  }
+}
+
 .portfolio-section:not(:first-child)::before {
   content: '';
   position: absolute;
@@ -177,16 +203,6 @@ body {
   background-position: center center;
   pointer-events: none;
   z-index: 0;
-}
-
-.portfolio-section-scrollable {
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
-  scroll-snap-align: start;
-  position: relative;
-  overflow: visible;
-  will-change: transform, opacity;
 }
 
 .portfolio-section-scrollable::-webkit-scrollbar {
@@ -228,12 +244,18 @@ body {
 
 /* Mobile-specific optimizations */
 @media (max-width: 768px) {
+  .portfolio-container {
+    scroll-snap-type: y proximity;
+  }
+  
   .portfolio-section {
-    scroll-snap-align: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
   
   .portfolio-section-scrollable {
-    scroll-snap-align: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
   
   /* Prevent horizontal scroll */

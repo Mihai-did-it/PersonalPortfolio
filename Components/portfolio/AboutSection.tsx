@@ -19,7 +19,7 @@ export default function AboutSection() {
   };
 
   return (
-    <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
+    <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 md:flex md:items-center md:justify-center overflow-hidden py-8 md:py-0">
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
         <InteractiveStarfield 
@@ -37,7 +37,7 @@ export default function AboutSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-20">
         <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-start">
           {/* Left Column - Text in Glass Box */}
           <motion.div

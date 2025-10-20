@@ -122,14 +122,14 @@ export default function HeroSection() {
 
       {/* Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20"
+        className="absolute bottom-8 md:bottom-12 z-20 w-full"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
       >
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 w-full">
           <span className="text-xs md:text-sm text-slate-400 font-medium">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5 md:w-6 md:h-6 text-cyan-500" />
+          <ArrowDown className="w-5 h-5 md:w-6 md:h-6 text-cyan-500 mx-auto" />
         </div>
       </motion.div>
     </div>

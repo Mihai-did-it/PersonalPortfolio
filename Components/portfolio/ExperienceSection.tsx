@@ -37,7 +37,7 @@ export default function ExperienceSection() {
   ];
 
   return (
-    <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
+    <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 md:flex md:items-center md:justify-center overflow-hidden py-8 md:py-0">
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
         <InteractiveStarfield 
@@ -55,7 +55,7 @@ export default function ExperienceSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-20">
         <motion.h2 
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 sm:mb-12 md:mb-16 text-center bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 30 }}
