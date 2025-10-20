@@ -8,7 +8,7 @@ export default function HeroSection() {
   const canvasRef = useRef(null);
 
   return (
-    <div className="relative w-full min-h-svh hero-section-bg flex items-center justify-center overflow-hidden">
+    <div className="relative w-full min-h-dvh hero-section-bg flex items-center justify-center overflow-hidden">
       {/* Three.js Background - Full coverage, no overflow */}
       <div className="absolute inset-0 z-0 opacity-50">
         <AnimatedGrid canvasRef={canvasRef} />

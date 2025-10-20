@@ -25,9 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="fixed-background" style={{
-          background: 'linear-gradient(to bottom right, rgb(2, 6, 23), rgb(15, 23, 42), rgb(6, 78, 97))'
-        }} />
         {children}
       </body>
     </html>
