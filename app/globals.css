@@ -138,9 +138,10 @@ body {
       to bottom,
       rgb(2, 6, 23) 0%,
       rgb(15, 23, 42) 40%,
-      rgb(6, 78, 97) 60%,
-      rgba(6, 78, 97, 0.3) 80%,
-      rgba(6, 78, 97, 0.1) 90%,
+      rgb(6, 78, 97) 65%,
+      rgba(6, 78, 97, 0.5) 85%,
+      rgba(6, 78, 97, 0.2) 93%,
+      rgba(6, 78, 97, 0.05) 97%,
       transparent 100%
     ) !important;
   }
@@ -170,8 +171,11 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
+  min-height: 100dvh;
   z-index: -1;
   background: transparent;
   pointer-events: none;

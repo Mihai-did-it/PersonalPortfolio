@@ -26,9 +26,6 @@ export default function ContactSection() {
     <div
       ref={sectionRef}
       className="relative w-full min-h-svh h-auto overflow-visible pt-12 sm:pt-16 md:pt-20 contact-section-bg"
-      style={{
-        paddingBottom: "calc(clamp(4rem, 10vw, 7rem) + env(safe-area-inset-bottom, 0px))"
-      }}
     >
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
@@ -164,7 +161,7 @@ export default function ContactSection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="text-center mt-12 sm:mt-16 text-slate-500 text-xs sm:text-sm px-4"
+          className="text-center mt-12 sm:mt-16 pb-8 text-slate-500 text-xs sm:text-sm px-4"
         >
           <p>© 2025 Mihai Lache. Built with React, Three.js, and attention to detail.</p>
         </motion.div>
