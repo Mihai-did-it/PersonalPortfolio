@@ -32,7 +32,12 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
     rendererRef.current = renderer;
 
     // Create multiple layers of stars with different depths
-    const starLayers = [];
+    const starLayers: Array<{
+      mesh: THREE.Points;
+      velocities: Float32Array;
+      material: THREE.ShaderMaterial;
+      config: { count: number; size: number; speed: number; color: number };
+    }> = [];
     const layerConfigs = [
       { count: 2000, size: 0.8, speed: 0.2, color: 0xffffff },
       { count: 1600, size: 1.2, speed: 0.15, color: 0x88ccff },
@@ -105,7 +110,11 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
     starsRef.current = starLayers;
 
     // Shooting stars
-    const shootingStars = [];
+    const shootingStars: Array<{
+      mesh: THREE.Line;
+      velocity: { x: number; y: number; z: number };
+      life: number;
+    }> = [];
     const createShootingStar = () => {
       if (shootingStars.length > 5) return;
 
@@ -121,7 +130,7 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
       const startY = 30 + Math.random() * 20;
       const startZ = -30;
 
-      const points = [];
+      const points: THREE.Vector3[] = [];
       for (let i = 0; i < 10; i++) {
         points.push(new THREE.Vector3(
           startX - i * 0.5,
@@ -143,7 +152,11 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
     };
 
     // Meteors
-    const meteors = [];
+    const meteors: Array<{
+      mesh: THREE.Mesh;
+      velocity: { x: number; y: number; z: number };
+      life: number;
+    }> = [];
     const createMeteor = () => {
       if (meteors.length > 3) return;
 
@@ -258,7 +271,11 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
         if (star.life <= 0) {
           scene.remove(star.mesh);
           star.mesh.geometry.dispose();
-          star.mesh.material.dispose();
+          if (Array.isArray(star.mesh.material)) {
+            star.mesh.material.forEach(m => m.dispose());
+          } else {
+            star.mesh.material.dispose();
+          }
           shootingStars.splice(i, 1);
         }
       }
@@ -275,7 +292,11 @@ export default function InteractiveStarfield({ canvasRef, isInView }) {
         if (meteor.life <= 0) {
           scene.remove(meteor.mesh);
           meteor.mesh.geometry.dispose();
-          meteor.mesh.material.dispose();
+          if (Array.isArray(meteor.mesh.material)) {
+            meteor.mesh.material.forEach(m => m.dispose());
+          } else {
+            meteor.mesh.material.dispose();
+          }
           meteors.splice(i, 1);
         }
       }
