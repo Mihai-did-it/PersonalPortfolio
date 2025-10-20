@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import HeroSection from "../Components/portfolio/HeroSection";
 import AboutSection from "../Components/portfolio/AboutSection";
 import ExperienceSection from "../Components/portfolio/ExperienceSection";
@@ -14,7 +14,24 @@ import TopNavigation from "../Components/portfolio/TopNavigation";
 export default function Portfolio() {
   const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll({ target: containerRef });
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    container.style.scrollSnapType = isMobile ? "y mandatory" : "y proximity";
+  }, [isMobile]);
 
   const sections = [
     { id: "hero", label: "Home" },
@@ -70,21 +87,34 @@ export default function Portfolio() {
     const container = containerRef.current;
     if (!container) return;
 
-    // Temporarily disable scroll-snap to prevent snap-back effect
-    container.style.scrollSnapType = "none";
-    
-    const sectionHeight = window.innerHeight;
-    container.scrollTo({
-      top: sectionHeight * index,
-      behavior: "smooth"
-    });
+    // Only use scroll-snap manipulation on desktop
+    if (!isMobile) {
+      const sections = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
+      const target = sections[index] as HTMLElement | undefined;
+      if (!target) return;
 
-    // Re-enable scroll-snap after animation completes
-    setTimeout(() => {
-      if (container) {
-        container.style.scrollSnapType = "y mandatory";
+      // Temporarily disable scroll-snap to prevent snap-back effect
+      container.style.scrollSnapType = "none";
+
+      const targetOffset = target.offsetTop - container.offsetTop;
+      container.scrollTo({
+        top: targetOffset,
+        behavior: "smooth"
+      });
+
+      // Re-enable scroll-snap after animation completes
+      setTimeout(() => {
+        if (container) {
+          container.style.scrollSnapType = "y proximity";
+        }
+      }, 1000);
+    } else {
+      // On mobile, just scroll to the section without snap manipulation
+      const sections = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
+      if (sections[index]) {
+        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 1000);
+    }
   };
 
   return (
@@ -104,6 +134,7 @@ export default function Portfolio() {
 
       <div ref={containerRef} className="portfolio-container">
         <motion.div 
+          data-section="hero"
           className="portfolio-section"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -112,7 +143,9 @@ export default function Portfolio() {
         >
           <HeroSection />
         </motion.div>
+        
         <motion.div 
+          data-section="about"
           className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +154,9 @@ export default function Portfolio() {
         >
           <AboutSection />
         </motion.div>
+        
         <motion.div 
+          data-section="experience"
           className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -130,7 +165,9 @@ export default function Portfolio() {
         >
           <ExperienceSection />
         </motion.div>
+        
         <motion.div 
+          data-section="projects"
           className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +176,9 @@ export default function Portfolio() {
         >
           <ProjectsSection />
         </motion.div>
+        
         <motion.div 
+          data-section="contact"
           className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

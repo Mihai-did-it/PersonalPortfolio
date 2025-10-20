@@ -14,56 +14,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure consistent viewport height across devices */
-html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: fixed;
-}
-
-:root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
-  
-  /* Responsive font sizing */
-  --base-font-size: clamp(14px, 1vw, 16px);
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-  font-size: var(--base-font-size);
-}
-
-/* Prevent text size adjustment on mobile */
-@media screen and (max-width: 768px) {
-  body {
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-  }
-}
-
-/* Ensure consistent scaling on larger screens */
-@media screen and (min-width: 1920px) {
-  html {
-    font-size: 18px;
-  }
-}
-
-@media screen and (min-width: 2560px) {
-  html {
-    font-size: 20px;
-  }
-}
-
 /* Custom Scrollbar Styling */
 /* For Webkit browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
@@ -102,26 +52,105 @@ body {
 /* Portfolio-specific styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* Ensure consistent viewport height across devices */
+html, body {
+  width: 100%;
+}
+
+/* Desktop: Fixed viewport */
+@media (min-width: 769px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+  }
+}
+
+/* Mobile: Allow natural scrolling */
+@media (max-width: 768px) {
+  html, body {
+    height: auto;
+    overflow-y: auto;
+    position: static;
+  }
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  
+  /* Responsive font sizing */
+  --base-font-size: clamp(14px, 1vw, 16px);
+}
+
 body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-size: var(--base-font-size);
   margin: 0;
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  overflow: hidden;
   background: #0f172a;
   color: #f8fafc;
   -webkit-text-size-adjust: 100%;
 }
 
 .portfolio-container {
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: scroll;
-  scroll-snap-type: none;
+  width: 100%;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
-  overscroll-behavior-y: contain;
+}
+
+/* Desktop: Fixed viewport container */
+@media (min-width: 769px) {
+  .portfolio-container {
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: scroll;
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Mobile: Scroll snapping with mandatory alignment */
+@media (max-width: 768px) {
+  .portfolio-container {
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 5rem;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* Prevent text size adjustment on mobile */
+@media screen and (max-width: 768px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+}
+
+/* Ensure consistent scaling on larger screens */
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
 }
 
 .portfolio-container::-webkit-scrollbar {
@@ -146,7 +175,8 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
-  scroll-snap-align: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
   overflow: visible;
   will-change: transform, opacity;
@@ -156,7 +186,8 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   width: 100%;
-  scroll-snap-align: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   position: relative;
   overflow: visible;
   will-change: transform, opacity;
@@ -183,15 +214,17 @@ body {
   .portfolio-section {
     min-height: 100vh;
     min-height: 100dvh;
-    height: auto !important;
-    overflow: visible !important;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
   
   .portfolio-section-scrollable {
     min-height: 100vh;
     min-height: 100dvh;
-    height: auto !important;
-    overflow: visible !important;
+    height: auto;
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -281,4 +314,3 @@ body {
     height: -webkit-fill-available;
   }
 }
-

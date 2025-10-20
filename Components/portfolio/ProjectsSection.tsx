@@ -80,7 +80,10 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <div ref={sectionRef} className="relative w-full h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 overflow-visible lg:overflow-hidden py-12 sm:py-16 md:py-20 lg:flex lg:items-center lg:justify-center lg:py-0"
+    >
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
         <InteractiveStarfield 
