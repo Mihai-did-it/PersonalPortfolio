@@ -34,7 +34,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.h1 
-            className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-4 md:mb-6 tracking-tight px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.9, ease: "easeOut" }}
@@ -45,7 +45,7 @@ export default function HeroSection() {
           </motion.h1>
 
           <motion.p 
-            className="text-xl md:text-2xl text-cyan-300 mb-4 font-light"
+            className="text-lg sm:text-xl md:text-2xl text-cyan-300 mb-3 md:mb-4 font-light px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
@@ -54,7 +54,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.p 
-            className="text-lg text-slate-400 mb-12 max-w-2xl mx-auto"
+            className="text-base md:text-lg text-slate-400 mb-8 md:mb-12 max-w-2xl mx-auto px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
@@ -63,14 +63,14 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div 
-            className="flex flex-wrap gap-4 justify-center"
+            className="flex flex-col sm:flex-row flex-wrap gap-3 md:gap-4 justify-center px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
             <Button 
               size="lg"
-              className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-xl shadow-cyan-500/20 hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 group"
+              className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-xl shadow-cyan-500/20 hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 group w-full sm:w-auto"
             >
               <Mail className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
               Get in Touch
@@ -79,7 +79,7 @@ export default function HeroSection() {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-2 border-slate-600 hover:border-cyan-500 bg-slate-800/50 backdrop-blur-md hover:bg-slate-700/50 text-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="border-2 border-slate-600 hover:border-cyan-500 bg-slate-800/50 backdrop-blur-md hover:bg-slate-700/50 text-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
               onClick={() => window.open('/assets/NewGrad_October.pdf', '_blank')}
             >
               <FileText className="w-5 h-5 mr-2" />
@@ -89,7 +89,7 @@ export default function HeroSection() {
 
           {/* Social Links */}
           <motion.div 
-            className="flex gap-6 justify-center mt-12"
+            className="flex gap-4 md:gap-6 justify-center mt-8 md:mt-12 px-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
@@ -122,14 +122,14 @@ export default function HeroSection() {
 
       {/* Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.4, duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-sm text-slate-400 font-medium">Scroll to explore</span>
-          <ArrowDown className="w-6 h-6 text-cyan-500" />
+          <span className="text-xs md:text-sm text-slate-400 font-medium">Scroll to explore</span>
+          <ArrowDown className="w-5 h-5 md:w-6 md:h-6 text-cyan-500" />
         </div>
       </motion.div>
     </div>

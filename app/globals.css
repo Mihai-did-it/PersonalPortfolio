@@ -226,3 +226,35 @@ body {
   --dark: #020617;
 }
 
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .portfolio-section {
+    scroll-snap-align: center;
+  }
+  
+  .portfolio-section-scrollable {
+    scroll-snap-align: center;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Optimize touch interactions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Improve mobile viewport handling */
+@supports (-webkit-touch-callout: none) {
+  .portfolio-container {
+    height: -webkit-fill-available;
+  }
+  
+  .portfolio-section {
+    height: -webkit-fill-available;
+  }
+}
+

@@ -55,9 +55,9 @@ export default function ExperienceSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 py-20">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
         <motion.h2 
-          className="text-5xl md:text-6xl font-bold mb-16 text-center bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 sm:mb-12 md:mb-16 text-center bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -65,7 +65,7 @@ export default function ExperienceSection() {
           Experience
         </motion.h2>
 
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
@@ -83,7 +83,7 @@ export default function ExperienceSection() {
             >
               <div className="relative group">
                 <div 
-                  className="relative backdrop-blur-md rounded-2xl p-6 shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                  className="relative backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
                   style={{
                     background: hoveredExp === index
                       ? `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.15), rgba(30, 41, 59, 0.4))`
@@ -106,21 +106,21 @@ export default function ExperienceSection() {
                   )}
                   
                   <div className="relative z-10">
-                    <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                    <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3 sm:mb-4">
                       <div>
-                        <div className="flex items-center gap-3 mb-2">
-                          <Briefcase className="w-5 h-5 text-cyan-400" />
-                          <h3 className="text-2xl font-bold text-slate-100">{exp.company}</h3>
+                        <div className="flex items-center gap-2 sm:gap-3 mb-2">
+                          <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-100">{exp.company}</h3>
                         </div>
-                        <p className="text-lg text-cyan-400 font-medium">{exp.role}</p>
+                        <p className="text-base sm:text-lg text-cyan-400 font-medium">{exp.role}</p>
                       </div>
                       <div className="flex items-center gap-2 mt-2 md:mt-0 text-slate-400">
-                        <Calendar className="w-4 h-4" />
-                        <span className="text-sm">{exp.period}</span>
+                        <Calendar className="w-3 h-3 sm:w-4 sm:h-4" />
+                        <span className="text-xs sm:text-sm">{exp.period}</span>
                       </div>
                     </div>
 
-                    <p className="text-slate-300 mb-4 leading-relaxed">{exp.description}</p>
+                    <p className="text-slate-300 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">{exp.description}</p>
 
                     <div className="flex flex-wrap gap-2">
                       {exp.tech.map((tech, techIndex) => (

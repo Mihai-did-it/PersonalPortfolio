@@ -37,17 +37,17 @@ export default function AboutSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-start">
           {/* Left Column - Text in Glass Box */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-8 border border-slate-700/50 shadow-2xl">
+            <div className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 sm:p-8 border border-slate-700/50 shadow-2xl">
               <motion.h2 
-                className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.2, duration: 0.9 }}
@@ -56,7 +56,7 @@ export default function AboutSection() {
               </motion.h2>
               
               <motion.div 
-                className="space-y-4 text-slate-300 text-lg leading-relaxed"
+                className="space-y-3 sm:space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -76,7 +76,7 @@ export default function AboutSection() {
 
           {/* Right Column - Education Cards */}
           <motion.div
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
             initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
@@ -91,7 +91,7 @@ export default function AboutSection() {
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ delay: 0.6 + index * 0.2, duration: 0.8 }}
-                className="relative overflow-hidden rounded-2xl p-6 shadow-xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+                className="relative overflow-hidden rounded-2xl p-5 sm:p-6 shadow-xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
                 style={{
                   background: hoveredCard === index
                     ? `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.15), rgba(30, 41, 59, 0.4))`
@@ -129,9 +129,9 @@ export default function AboutSection() {
                 )}
                 
                 <div className="relative z-10">
-                  <h3 className="text-xl font-semibold text-slate-100 mb-2">{edu.school}</h3>
-                  <p className="text-cyan-400 font-medium mb-1">{edu.degree}</p>
-                  <p className="text-slate-400 text-sm">{edu.year}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-100 mb-2">{edu.school}</h3>
+                  <p className="text-cyan-400 font-medium mb-1 text-sm sm:text-base">{edu.degree}</p>
+                  <p className="text-slate-400 text-xs sm:text-sm">{edu.year}</p>
                 </div>
                 
                 {/* Corner accents */}
