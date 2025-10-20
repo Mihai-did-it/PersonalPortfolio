@@ -30,7 +30,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <span className="text-sm font-medium text-cyan-400">Available for Full-Time Opportunities</span>
+            <span className="text-sm font-medium text-cyan-400">Available for Internship Opportunities</span>
           </motion.div>
 
           <motion.h1 
@@ -50,7 +50,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            CS Student → Software Engineer
+            Software Engineer
           </motion.p>
 
           <motion.p 
@@ -59,7 +59,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            Building scalable, data-driven systems with elegant design.
+            U.S Citizen
           </motion.p>
 
           <motion.div 
