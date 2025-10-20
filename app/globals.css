@@ -72,6 +72,8 @@ body {
   background: transparent;
   margin: 0;
   padding: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Desktop: Fixed viewport */
@@ -151,6 +153,18 @@ body {
   }
 }
 
+/* Fixed background layer for Safari translucent bars */
+.fixed-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: transparent;
+  pointer-events: none;
+}
+
 .portfolio-container {
   width: 100%;
   max-width: 100vw;
@@ -159,8 +173,9 @@ body {
   scrollbar-width: thin;
   scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
   overflow-x: hidden;
-  background: #0f172a;
+  background: transparent;
   min-height: 100vh;
+  position: relative;
 }
 
 /* Desktop: Fixed viewport container */
