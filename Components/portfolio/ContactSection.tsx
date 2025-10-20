@@ -25,7 +25,7 @@ export default function ContactSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full min-h-screen h-auto overflow-visible pt-12 sm:pt-16 md:pt-20 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950"
+      className="relative w-full min-h-screen h-auto overflow-visible pt-12 sm:pt-16 md:pt-20 contact-section-bg"
       style={{
         paddingBottom: "calc(clamp(4rem, 10vw, 7rem) + env(safe-area-inset-bottom, 0px))"
       }}

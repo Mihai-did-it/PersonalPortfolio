@@ -86,19 +86,45 @@ html, body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
   font-size: var(--base-font-size);
   margin: 0;
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #0f172a;
+  background: transparent;
   color: #f8fafc;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Desktop body background */
+@media (min-width: 769px) {
+  body {
+    background: #0f172a;
+  }
+}
+
+/* Mobile body background - transparent for footer */
+@media (max-width: 768px) {
+  body {
+    background: transparent;
+  }
+}
+
+/* Contact section background with transparent footer */
+.contact-section-bg {
+  background: linear-gradient(to bottom right, rgb(2, 6, 23), rgb(15, 23, 42), rgb(6, 78, 97));
+}
+
+@media (max-width: 768px) {
+  .contact-section-bg {
+    background: linear-gradient(
+      to bottom,
+      rgb(2, 6, 23) 0%,
+      rgb(15, 23, 42) 50%,
+      rgb(6, 78, 97) 80%,
+      rgba(6, 78, 97, 0.5) 90%,
+      transparent 100%
+    );
+  }
 }
 
 .portfolio-container {
