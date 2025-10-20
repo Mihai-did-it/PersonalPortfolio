@@ -4,10 +4,10 @@
 
 @layer utilities {
   .h-svh {
-    height: 50svh;
+    height: 100svh;
   }
   .min-h-svh {
-    min-height: 50svh;
+    min-height: 100svh;
   }
 }
 
@@ -100,7 +100,7 @@ body {
 @media (max-width: 768px) {
   html, body {
     height: auto;
-    min-height: 100svh;
+    min-height: 100svh + 3px;
     overflow-y: auto;
     overflow-x: hidden;
     position: static;
