@@ -2,18 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure consistent viewport height across devices */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  
+  /* Responsive font sizing */
+  --base-font-size: clamp(14px, 1vw, 16px);
 }
 
 body {
@@ -24,22 +39,27 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+  font-size: var(--base-font-size);
 }
 
-/* Custom Scrollbar Styles */
-.scrollbar-thin::-webkit-scrollbar {
-  width: 8px;
+/* Prevent text size adjustment on mobile */
+@media screen and (max-width: 768px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
 }
 
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
+/* Ensure consistent scaling on larger screens */
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: rgb(34 211 238 / 0.5);
-  border-radius: 4px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: rgb(34 211 238 / 0.7);
+@media screen and (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
 }

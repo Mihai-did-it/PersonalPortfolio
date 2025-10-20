@@ -90,10 +90,12 @@ export default function Portfolio() {
           overflow: hidden;
           background: #0f172a;
           color: #f8fafc;
+          -webkit-text-size-adjust: 100%;
         }
 
         .portfolio-container {
           height: 100vh;
+          height: 100dvh; /* Use dynamic viewport height for mobile */
           overflow-y: scroll;
           scroll-snap-type: y mandatory;
           scroll-behavior: smooth;
@@ -122,6 +124,7 @@ export default function Portfolio() {
 
         .portfolio-section {
           height: 100vh;
+          height: 100dvh; /* Use dynamic viewport height */
           width: 100%;
           scroll-snap-align: start;
           scroll-snap-stop: always;
@@ -132,6 +135,7 @@ export default function Portfolio() {
 
         .portfolio-section-scrollable {
           min-height: 100vh;
+          min-height: 100dvh; /* Use dynamic viewport height */
           width: 100%;
           scroll-snap-align: start;
           position: relative;
