@@ -62,13 +62,13 @@ export default function AboutSection() {
                 transition={{ delay: 0.4, duration: 0.8 }}
               >
                 <p>
-                  I'm a Computer Science student at UC Santa Cruz, passionate about building systems that scale and interfaces that delight. My journey spans from backend architecture to full-stack development, with a focus on data engineering and cloud infrastructure.
+                  I'm a Computer Science B.S graduate from UC Santa Cruz. I'm passionate about building systems that scale. My journey spans from backend architecture to full-stack development, with a focus on data engineering and cloud infrastructure.
                 </p>
                 <p>
-                  Currently exploring AI/ML at Maastricht University (expected 2027) and gained international perspective through study abroad at the University of Tokyo.
+                  Currently enrolled in a Masters program in AI/ML at Maastricht University (expected 2027) and gained international perspective through study abroad at the University of Tokyo.
                 </p>
                 <p>
-                  I thrive at the intersection of elegant code and user experience, believing that technical excellence and visual design aren't mutually exclusive—they're complementary forces that create truly exceptional products.
+                  I write code with design in mind, aiming for software that’s efficient, intuitive, and clear.
                 </p>
               </motion.div>
             </div>
