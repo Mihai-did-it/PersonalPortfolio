@@ -4,10 +4,10 @@
 
 @layer utilities {
   .h-svh {
-    height: 100svh;
+    height: 50svh;
   }
   .min-h-svh {
-    min-height: 100svh;
+    min-height: 50svh;
   }
 }
 
