@@ -113,7 +113,7 @@ export default function Portfolio() {
           <HeroSection />
         </motion.div>
         <motion.div 
-          className="portfolio-section"
+          className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
@@ -122,7 +122,7 @@ export default function Portfolio() {
           <AboutSection />
         </motion.div>
         <motion.div 
-          className="portfolio-section"
+          className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
@@ -140,7 +140,7 @@ export default function Portfolio() {
           <ProjectsSection />
         </motion.div>
         <motion.div 
-          className="portfolio-section"
+          className="portfolio-section-scrollable"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}

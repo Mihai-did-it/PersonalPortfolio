@@ -23,9 +23,9 @@ export default function ContactSection() {
   };
 
   return (
-    <div ref={sectionRef} className="relative w-full h-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 md:flex md:items-center md:justify-center overflow-hidden py-8 md:py-0">
-      {/* Three.js Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
+    <div ref={sectionRef} className="relative w-full min-h-screen overflow-visible py-12 sm:py-16 md:py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950">
+      {/* Three.js Interactive Background */}
+      <div className="absolute inset-0 z-0 opacity-60">
         <FloatingParticles 
           canvasRef={canvasRef}
           isInView={isInView}
