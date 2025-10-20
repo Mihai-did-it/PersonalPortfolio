@@ -11,6 +11,16 @@ export default function ProjectsSection() {
   const astronautCanvasRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.1 });
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    if (hoveredProject !== index) return;
+    
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePosition({ x, y });
+  };
 
   const projects = [
     {
@@ -120,11 +130,41 @@ export default function ProjectsSection() {
                 scale: 1.02,
                 transition: { duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }
               }}
-              className="group relative overflow-hidden rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 cursor-pointer"
+              className="group relative overflow-hidden rounded-xl cursor-pointer"
+              style={{
+                background: hoveredProject === index
+                  ? `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(255,255,255,0.1), rgba(255,255,255,0.03))`
+                  : 'rgba(255,255,255,0.05)'
+              }}
               onMouseEnter={() => setHoveredProject(index)}
-              onMouseLeave={() => setHoveredProject(null)}
+              onMouseLeave={() => {
+                setHoveredProject(null);
+                setMousePosition({ x: 50, y: 50 });
+              }}
+              onMouseMove={(e) => handleMouseMove(e, index)}
             >
-              <div className="relative h-full overflow-hidden rounded-2xl bg-slate-800/30 backdrop-blur-sm border border-slate-700/30 shadow-2xl">
+              <div className="relative h-full overflow-hidden rounded-2xl bg-slate-800/30 backdrop-blur-sm shadow-2xl"
+                style={{
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderImage: hoveredProject === index
+                    ? `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(34, 211, 238, 0.8), rgba(100, 116, 139, 0.3)) 1`
+                    : 'none',
+                  borderColor: hoveredProject === index ? 'transparent' : 'rgba(100, 116, 139, 0.3)'
+                }}
+              >
+                {/* Mouse spotlight effect */}
+                {hoveredProject === index && (
+                  <motion.div
+                    className="absolute inset-0 opacity-0 pointer-events-none"
+                    animate={{
+                      opacity: 1,
+                      background: `radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(34, 211, 238, 0.15), transparent 40%)`
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                  />
+                )}
+                
                 {/* Project Image */}
                 <motion.div 
                   className="relative overflow-hidden"
@@ -254,17 +294,35 @@ export default function ProjectsSection() {
                   </div>
                 </motion.div>
 
-                {/* Glow effect on hover */}
+                {/* Animated border glow effect */}
                 <motion.div 
-                  className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-cyan-400 to-cyan-500 rounded-2xl blur-2xl -z-10"
+                  className="absolute -inset-0.5 rounded-2xl -z-10 opacity-0"
                   animate={{
-                    opacity: hoveredProject === index ? 0.4 : 0,
+                    opacity: hoveredProject === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div 
+                    className="absolute inset-0 rounded-2xl"
+                    style={{
+                      background: hoveredProject === index 
+                        ? `radial-gradient(800px circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(34, 211, 238, 0.4), rgba(6, 182, 212, 0.2) 40%, transparent 70%)`
+                        : 'transparent',
+                      filter: 'blur(20px)',
+                    }}
+                  />
+                </motion.div>
+                
+                {/* Subtle overall glow */}
+                <motion.div 
+                  className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-cyan-400/20 to-cyan-500/20 rounded-2xl blur-xl -z-20"
+                  animate={{
+                    opacity: hoveredProject === index ? 0.6 : 0,
                     scale: hoveredProject === index ? 1.05 : 1,
                   }}
                   transition={{ 
                     duration: 0.4,
-                    opacity: { duration: 0.3 },
-                    scale: { duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }
+                    ease: [0.34, 1.56, 0.64, 1]
                   }}
                 />
               </div>

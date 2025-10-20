@@ -67,11 +67,24 @@ export default function Portfolio() {
   }, []);
 
   const navigateToSection = (index) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Temporarily disable scroll-snap to prevent snap-back effect
+    container.style.scrollSnapType = "none";
+    
     const sectionHeight = window.innerHeight;
-    containerRef.current?.scrollTo({
+    container.scrollTo({
       top: sectionHeight * index,
       behavior: "smooth"
     });
+
+    // Re-enable scroll-snap after animation completes
+    setTimeout(() => {
+      if (container) {
+        container.style.scrollSnapType = "y mandatory";
+      }
+    }, 1000);
   };
 
   return (
@@ -102,6 +115,7 @@ export default function Portfolio() {
           -webkit-overflow-scrolling: touch;
           scrollbar-width: thin;
           scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
+          overscroll-behavior-y: contain;
         }
 
         .portfolio-container::-webkit-scrollbar {
@@ -131,6 +145,33 @@ export default function Portfolio() {
           position: relative;
           overflow: hidden;
           will-change: transform, opacity;
+        }
+        
+        /* Grid background for all sections except hero */
+        .portfolio-section:not(:first-child)::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+          background-size: 50px 50px;
+          background-position: center center;
+          pointer-events: none;
+          z-index: 0;
+        }
+        
+        .portfolio-section-scrollable:not(:first-child)::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: 
+            linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
+          background-size: 50px 50px;
+          background-position: center center;
+          pointer-events: none;
+          z-index: 0;
         }
 
         .portfolio-section-scrollable {

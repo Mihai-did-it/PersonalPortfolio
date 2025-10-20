@@ -8,6 +8,15 @@ export default function AboutSection() {
   const canvasRef = useRef(null);
   const astronautCanvasRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
+  const [mousePos, setMousePos] = React.useState({ x: 50, y: 50 });
+  const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+  };
 
   return (
     <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
@@ -72,38 +81,64 @@ export default function AboutSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30"
-            >
-              <h3 className="text-xl font-semibold text-slate-100 mb-2">UC Santa Cruz</h3>
-              <p className="text-cyan-400 font-medium mb-1">BS Computer Science</p>
-              <p className="text-slate-400 text-sm">2021 - 2025</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30"
-            >
-              <h3 className="text-xl font-semibold text-slate-100 mb-2">Maastricht University</h3>
-              <p className="text-cyan-400 font-medium mb-1">MSc Artificial Intelligence</p>
-              <p className="text-slate-400 text-sm">Expected 2027</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: 1.0, duration: 0.8 }}
-              className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 hover:scale-[1.02] hover:border-cyan-500/30"
-            >
-              <h3 className="text-xl font-semibold text-slate-100 mb-2">University of Tokyo</h3>
-              <p className="text-cyan-400 font-medium mb-1">Study Abroad Program</p>
-              <p className="text-slate-400 text-sm">2023</p>
-            </motion.div>
+            {[
+              { school: "UC Santa Cruz", degree: "BS Computer Science", year: "2021 - 2025" },
+              { school: "Maastricht University", degree: "MSc Artificial Intelligence", year: "Expected 2027" },
+              { school: "University of Tokyo", degree: "Study Abroad Program", year: "2023" }
+            ].map((edu, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{ delay: 0.6 + index * 0.2, duration: 0.8 }}
+                className="relative overflow-hidden rounded-2xl p-6 shadow-xl transition-all duration-500 hover:scale-[1.02] cursor-pointer"
+                style={{
+                  background: hoveredCard === index
+                    ? `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.15), rgba(30, 41, 59, 0.4))`
+                    : 'rgba(30, 41, 59, 0.4)',
+                  backdropFilter: 'blur(12px)',
+                  borderWidth: '1px',
+                  borderStyle: 'solid',
+                  borderColor: hoveredCard === index 
+                    ? 'rgba(34, 211, 238, 0.5)' 
+                    : 'rgba(100, 116, 139, 0.5)'
+                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onMouseMove={(e) => handleCardMouseMove(e, index)}
+                whileHover={{ y: -8 }}
+              >
+                {/* Spotlight effect */}
+                {hoveredCard === index && (
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.1), transparent 40%)`
+                    }}
+                  />
+                )}
+                
+                {/* Glow effect */}
+                {hoveredCard === index && (
+                  <div 
+                    className="absolute -inset-1 rounded-2xl opacity-50 -z-10 blur-xl"
+                    style={{
+                      background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.6), transparent 70%)`
+                    }}
+                  />
+                )}
+                
+                <div className="relative z-10">
+                  <h3 className="text-xl font-semibold text-slate-100 mb-2">{edu.school}</h3>
+                  <p className="text-cyan-400 font-medium mb-1">{edu.degree}</p>
+                  <p className="text-slate-400 text-sm">{edu.year}</p>
+                </div>
+                
+                {/* Corner accents */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-tr-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>

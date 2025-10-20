@@ -9,6 +9,15 @@ export default function ExperienceSection() {
   const canvasRef = useRef(null);
   const astronautCanvasRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
+  const [mousePos, setMousePos] = React.useState({ x: 50, y: 50 });
+  const [hoveredExp, setHoveredExp] = React.useState<number | null>(null);
+
+  const handleExpMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+  };
 
   const experiences = [
     {
@@ -68,10 +77,33 @@ export default function ExperienceSection() {
                 scale: 1.02,
                 transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
               }}
+              onMouseEnter={() => setHoveredExp(index)}
+              onMouseLeave={() => setHoveredExp(null)}
+              onMouseMove={(e) => handleExpMouseMove(e, index)}
             >
               <div className="relative group">
-                <div className="relative bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-xl group-hover:shadow-2xl group-hover:shadow-cyan-500/10 transition-all duration-300 group-hover:border-cyan-500/30">
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div 
+                  className="relative backdrop-blur-md rounded-2xl p-6 shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                  style={{
+                    background: hoveredExp === index
+                      ? `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.15), rgba(30, 41, 59, 0.4))`
+                      : 'rgba(30, 41, 59, 0.4)',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: hoveredExp === index 
+                      ? 'rgba(34, 211, 238, 0.5)' 
+                      : 'rgba(100, 116, 139, 0.5)'
+                  }}
+                >
+                  {/* Mouse spotlight effect */}
+                  {hoveredExp === index && (
+                    <motion.div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: `radial-gradient(600px circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.1), transparent 40%)`
+                      }}
+                    />
+                  )}
                   
                   <div className="relative z-10">
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
@@ -102,7 +134,15 @@ export default function ExperienceSection() {
                     </div>
                   </div>
 
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/20 to-cyan-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+                  {/* Animated glow that follows mouse */}
+                  {hoveredExp === index && (
+                    <div 
+                      className="absolute -inset-1 rounded-2xl -z-10 blur-xl"
+                      style={{
+                        background: `radial-gradient(800px circle at ${mousePos.x}% ${mousePos.y}%, rgba(34, 211, 238, 0.5), rgba(6, 182, 212, 0.2) 40%, transparent 70%)`
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </motion.div>

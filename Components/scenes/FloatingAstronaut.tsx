@@ -6,8 +6,9 @@ export default function FloatingAstronaut({ canvasRef, isInView }) {
   const rendererRef = useRef<any>(null);
   const astronautRef = useRef<any>(null);
   const animationFrameRef = useRef<any>(null);
-  const targetPositionRef = useRef({ x: -8, y: 3, z: -10 });
-  const currentPositionRef = useRef({ x: -8, y: 3, z: -10 });
+  const targetPositionRef = useRef({ x: 0, y: 0, z: -10 });
+  const currentPositionRef = useRef({ x: 0, y: 0, z: -10 });
+  const lastClickTimeRef = useRef(0);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -151,8 +152,8 @@ export default function FloatingAstronaut({ canvasRef, isInView }) {
     // Scale down
     astronautGroup.scale.set(0.8, 0.8, 0.8);
     
-    // Position astronaut
-    astronautGroup.position.set(-8, 3, -10);
+    // Position astronaut at initial target position
+    astronautGroup.position.set(0, 0, -10);
 
     scene.add(astronautGroup);
 
@@ -170,19 +171,35 @@ export default function FloatingAstronaut({ canvasRef, isInView }) {
 
     // Click handler to move astronaut
     const handleClick = (event) => {
+      // Get the canvas for proper coordinate conversion
       const canvas = canvasRef.current;
       if (!canvas) return;
 
       const rect = canvas.getBoundingClientRect();
+      
+      // Convert click position to normalized device coordinates (-1 to +1)
       const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-      // Convert screen coordinates to 3D space
+      // Use the camera's field of view to accurately map to 3D space
+      const aspect = rect.width / rect.height;
+      const vFOV = (50 * Math.PI) / 180; // Convert FOV to radians
+      const distance = 20; // Camera's z position
+      
+      // Calculate the size of the view at the target z-plane (-10)
+      const targetZ = -10;
+      const depthFromCamera = distance + targetZ; // 30 units from camera
+      const height = 2 * Math.tan(vFOV / 2) * depthFromCamera;
+      const width = height * aspect;
+      
+      // Map normalized coordinates to world coordinates
       targetPositionRef.current = {
-        x: x * 15,
-        y: y * 10 + 3,
-        z: -10
+        x: x * (width / 2),
+        y: y * (height / 2),
+        z: targetZ
       };
+      
+      lastClickTimeRef.current = Date.now();
     };
 
     window.addEventListener('click', handleClick);
@@ -195,18 +212,26 @@ export default function FloatingAstronaut({ canvasRef, isInView }) {
       time += 0.01;
 
       if (astronautRef.current) {
+        // Check if recently clicked (within last 5 seconds)
+        const timeSinceClick = Date.now() - lastClickTimeRef.current;
+        const isRecentlyClicked = timeSinceClick < 5000;
+        
         // Smooth interpolation to target position
         const lerpFactor = 0.05;
         currentPositionRef.current.x += (targetPositionRef.current.x - currentPositionRef.current.x) * lerpFactor;
         currentPositionRef.current.y += (targetPositionRef.current.y - currentPositionRef.current.y) * lerpFactor;
         currentPositionRef.current.z += (targetPositionRef.current.z - currentPositionRef.current.z) * lerpFactor;
 
-        // Add gentle floating motion on top of position
-        const floatOffset = Math.sin(time * 0.5) * 0.3;
-        const driftOffset = Math.cos(time * 0.3) * 0.5;
+        // More floating motion when not recently clicked
+        const floatIntensity = isRecentlyClicked ? 0.3 : 1.2;
+        const driftIntensity = isRecentlyClicked ? 0.5 : 2.0;
         
-        astronautRef.current.position.x = currentPositionRef.current.x + driftOffset;
-        astronautRef.current.position.y = currentPositionRef.current.y + floatOffset;
+        const floatOffset = Math.sin(time * 0.5) * floatIntensity;
+        const driftOffsetX = Math.cos(time * 0.3) * driftIntensity;
+        const driftOffsetY = Math.sin(time * 0.4) * (driftIntensity * 0.7);
+        
+        astronautRef.current.position.x = currentPositionRef.current.x + driftOffsetX;
+        astronautRef.current.position.y = currentPositionRef.current.y + floatOffset + driftOffsetY;
         astronautRef.current.position.z = currentPositionRef.current.z;
         
         // Gentle rotation
