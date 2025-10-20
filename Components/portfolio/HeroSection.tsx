@@ -8,14 +8,14 @@ export default function HeroSection() {
   const canvasRef = useRef(null);
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-screen hero-section-bg flex items-center justify-center overflow-hidden">
       {/* Three.js Background - Full coverage, no overflow */}
       <div className="absolute inset-0 z-0 opacity-50">
         <AnimatedGrid canvasRef={canvasRef} />
       </div>
 
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-transparent to-slate-900/60 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/60 z-0 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
