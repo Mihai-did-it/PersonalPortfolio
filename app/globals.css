@@ -94,15 +94,20 @@ body {
   min-height: 200dvh; /* Extra height so Safari can collapse bars */
 }
 
-/* Desktop: Let body scroll normally */
+/* Desktop: Add scroll snap for smooth section navigation */
 @media (min-width: 769px) {
-  html, body {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+  
+  body {
     overflow-y: auto;
     overflow-x: hidden;
   }
 }
 
-/* Mobile: Body is the scroller - Safari needs this to detect scroll */
+/* Mobile: NO scroll snap - free scrolling only */
 @media (max-width: 768px) {
   html, body {
     height: auto;
@@ -112,6 +117,8 @@ body {
     position: static;
     width: 100%;
     max-width: 100vw;
+    scroll-snap-type: none; /* NO SNAP ON MOBILE */
+    scroll-behavior: smooth;
   }
 }
 
@@ -231,31 +238,37 @@ body {
   overflow-y: visible;
 }
 
-/* Desktop: Sections use dynamic viewport */
+/* Desktop: Sections snap to viewport with scroll-snap */
 @media (min-width: 769px) {
   .portfolio-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
     min-height: 100dvh;
     overflow: visible;
   }
   
   .portfolio-section-scrollable {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
     min-height: 100dvh;
     overflow: visible;
   }
 }
 
-/* Mobile: Sections use dynamic viewport, expand naturally */
+/* Mobile: NO scroll snap - sections just flow naturally */
 @media (max-width: 768px) {
   .portfolio-section {
     min-height: 100dvh;
     height: auto;
     overflow: visible;
+    /* NO scroll-snap-align on mobile */
   }
   
   .portfolio-section-scrollable {
     min-height: 100dvh;
     height: auto;
     overflow: visible;
+    /* NO scroll-snap-align on mobile */
   }
 }
 

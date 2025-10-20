@@ -15,7 +15,7 @@ export default function Portfolio() {
   const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollYProgress } = useScroll({ target: containerRef });
+  const { scrollYProgress } = useScroll();
 
   // Detect mobile
   useEffect(() => {
@@ -27,12 +27,6 @@ export default function Portfolio() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    container.style.scrollSnapType = isMobile ? "y mandatory" : "y proximity";
-  }, [isMobile]);
-
   const sections = [
     { id: "hero", label: "Home" },
     { id: "about", label: "About" },
@@ -42,15 +36,12 @@ export default function Portfolio() {
   ];
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
     const handleScroll = () => {
-      const scrollTop = container.scrollTop;
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const viewportHeight = window.innerHeight;
       
       // Get all section elements
-      const sectionElements = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
+      const sectionElements = document.querySelectorAll('[data-section]');
       
       let currentSection = 0;
       let minDistance = Infinity;
@@ -78,42 +69,26 @@ export default function Portfolio() {
       setActiveSection(currentSection);
     };
 
-    container.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
     handleScroll(); // Initial call
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navigateToSection = (index) => {
-    const container = containerRef.current;
-    if (!container) return;
+    const sectionElements = document.querySelectorAll('[data-section]');
+    const target = sectionElements[index] as HTMLElement | undefined;
+    if (!target) return;
 
-    // Only use scroll-snap manipulation on desktop
     if (!isMobile) {
-      const sections = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
-      const target = sections[index] as HTMLElement | undefined;
-      if (!target) return;
-
-      // Temporarily disable scroll-snap to prevent snap-back effect
-      container.style.scrollSnapType = "none";
-
-      const targetOffset = target.offsetTop - container.offsetTop;
-      container.scrollTo({
+      // Desktop: Use scroll snap with smooth scrolling
+      const targetOffset = target.offsetTop;
+      window.scrollTo({
         top: targetOffset,
         behavior: "smooth"
       });
-
-      // Re-enable scroll-snap after animation completes
-      setTimeout(() => {
-        if (container) {
-          container.style.scrollSnapType = "y proximity";
-        }
-      }, 1000);
     } else {
-      // On mobile, just scroll to the section without snap manipulation
-      const sections = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
-      if (sections[index]) {
-        sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Mobile: Simple smooth scroll, no snap
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
