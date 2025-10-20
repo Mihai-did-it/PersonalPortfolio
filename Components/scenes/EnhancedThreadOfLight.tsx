@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function EnhancedThreadOfLight({ canvasRef, isInView }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const lineRef = useRef(null);
-  const spheresRef = useRef([]);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const lineRef = useRef<any>(null);
+  const spheresRef = useRef<any>([]);
+  const animationFrameRef = useRef<any>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -32,8 +32,8 @@ export default function EnhancedThreadOfLight({ canvasRef, isInView }) {
     rendererRef.current = renderer;
 
     // Create thread of light
-    const points = [];
-    const spheres = [];
+    const points: any[] = [];
+    const spheres: any[] = [];
     
     for (let i = 0; i < 50; i++) {
       const t = i / 49;

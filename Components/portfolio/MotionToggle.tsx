@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, ZapOff } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 
 export default function MotionToggle({ motionIntensity, onToggle }) {
   const levels = ["LOW", "MED", "HIGH"];

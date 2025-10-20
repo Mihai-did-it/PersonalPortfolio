@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function FlowingParticles({ canvasRef, isInView }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const particlesRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const particlesRef = useRef<any>(null);
+  const animationFrameRef = useRef<any>(null);
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function FlowingParticles({ canvasRef, isInView }) {
       if (particlesRef.current) {
         const positions = particlesRef.current.mesh.geometry.attributes.position.array;
         const velocities = particlesRef.current.velocities;
-        const linePositions = [];
+        const linePositions: any[] = [];
 
         for (let i = 0; i < particleCount; i++) {
           const i3 = i * 3;

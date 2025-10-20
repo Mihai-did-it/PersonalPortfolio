@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function GlassSheets({ canvasRef, isInView, motionIntensity }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const sheetsRef = useRef([]);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const sheetsRef = useRef<any>([]);
+  const animationFrameRef = useRef<any>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -32,7 +32,7 @@ export default function GlassSheets({ canvasRef, isInView, motionIntensity }) {
 
     // Create glass sheets
     const sheetGeometry = new THREE.PlaneGeometry(6, 4);
-    const sheets = [];
+    const sheets: any[] = [];
 
     for (let i = 0; i < 5; i++) {
       const material = new THREE.MeshPhysicalMaterial({

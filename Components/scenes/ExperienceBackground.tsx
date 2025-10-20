@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function ExperienceBackground({ canvasRef, isInView }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const animationFrameRef = useRef<any>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;

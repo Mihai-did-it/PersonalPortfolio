@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function WaveGrid({ canvasRef, isInView }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const meshRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const meshRef = useRef<any>(null);
+  const animationFrameRef = useRef<any>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Mail, Linkedin, Github, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Textarea } from "@/Components/ui/textarea";
 import FloatingParticles from "../scenes/FloatingParticles";
 
 export default function ContactSection() {
@@ -29,6 +29,7 @@ export default function ContactSection() {
         <FloatingParticles 
           canvasRef={canvasRef}
           isInView={isInView}
+          motionIntensity="HIGH"
         />
       </div>
 

@@ -12,7 +12,7 @@ import ProgressDots from "../Components/portfolio/ProgressDots";
 import TopNavigation from "../Components/portfolio/TopNavigation";
 
 export default function Portfolio() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState(0);
   const { scrollYProgress } = useScroll({ target: containerRef });
 
@@ -30,12 +30,39 @@ export default function Portfolio() {
 
     const handleScroll = () => {
       const scrollTop = container.scrollTop;
-      const sectionHeight = window.innerHeight;
-      const currentSection = Math.round(scrollTop / sectionHeight);
+      const viewportHeight = window.innerHeight;
+      
+      // Get all section elements
+      const sectionElements = container.querySelectorAll('.portfolio-section, .portfolio-section-scrollable');
+      
+      let currentSection = 0;
+      let minDistance = Infinity;
+      
+      // Find which section's center is closest to the viewport center
+      sectionElements.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        
+        // Calculate the center of the section relative to viewport
+        const sectionCenter = rect.top + rect.height / 2;
+        const viewportCenter = viewportHeight / 2;
+        
+        // Distance from section center to viewport center
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        
+        // If section is in view (at least partially)
+        if (rect.top < viewportHeight && rect.bottom > 0) {
+          if (distance < minDistance) {
+            minDistance = distance;
+            currentSection = index;
+          }
+        }
+      });
+      
       setActiveSection(currentSection);
     };
 
     container.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial call
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -71,6 +98,26 @@ export default function Portfolio() {
           scroll-snap-type: y mandatory;
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(6, 182, 212, 0.3) transparent;
+        }
+
+        .portfolio-container::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .portfolio-container::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .portfolio-container::-webkit-scrollbar-thumb {
+          background: rgba(6, 182, 212, 0.3);
+          border-radius: 4px;
+          transition: background 0.3s ease;
+        }
+
+        .portfolio-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(6, 182, 212, 0.5);
         }
 
         .portfolio-section {
@@ -80,6 +127,33 @@ export default function Portfolio() {
           scroll-snap-stop: always;
           position: relative;
           overflow: hidden;
+          will-change: transform, opacity;
+        }
+
+        .portfolio-section-scrollable {
+          min-height: 100vh;
+          width: 100%;
+          scroll-snap-align: start;
+          position: relative;
+          overflow: visible;
+          will-change: transform, opacity;
+        }
+
+        .portfolio-section-scrollable::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        .portfolio-section-scrollable::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        .portfolio-section-scrollable::-webkit-scrollbar-thumb {
+          background: rgba(6, 182, 212, 0.2);
+          border-radius: 3px;
+        }
+
+        .portfolio-section-scrollable::-webkit-scrollbar-thumb:hover {
+          background: rgba(6, 182, 212, 0.4);
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -117,21 +191,51 @@ export default function Portfolio() {
       />
 
       <div ref={containerRef} className="portfolio-container">
-        <div className="portfolio-section">
+        <motion.div 
+          className="portfolio-section"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <HeroSection />
-        </div>
-        <div className="portfolio-section">
+        </motion.div>
+        <motion.div 
+          className="portfolio-section"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <AboutSection />
-        </div>
-        <div className="portfolio-section">
+        </motion.div>
+        <motion.div 
+          className="portfolio-section"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <ExperienceSection />
-        </div>
-        <div className="portfolio-section">
+        </motion.div>
+        <motion.div 
+          className="portfolio-section-scrollable"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <ProjectsSection />
-        </div>
-        <div className="portfolio-section">
+        </motion.div>
+        <motion.div 
+          className="portfolio-section"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <ContactSection />
-        </div>
+        </motion.div>
       </div>
     </>
   );

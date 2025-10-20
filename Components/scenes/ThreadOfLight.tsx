@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function ThreadOfLight({ canvasRef, isInView, motionIntensity }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const lineRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const lineRef = useRef<any>(null);
+  const animationFrameRef = useRef<any>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -31,7 +31,7 @@ export default function ThreadOfLight({ canvasRef, isInView, motionIntensity }) 
     rendererRef.current = renderer;
 
     // Create thread of light
-    const points = [];
+    const points: any[] = [];
     for (let i = 0; i < 50; i++) {
       points.push(new THREE.Vector3(
         Math.sin(i * 0.3) * 2,

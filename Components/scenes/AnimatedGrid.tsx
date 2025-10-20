@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export default function AnimatedGrid({ canvasRef }) {
-  const sceneRef = useRef(null);
-  const rendererRef = useRef(null);
-  const gridRef = useRef(null);
-  const particlesRef = useRef(null);
-  const animationFrameRef = useRef(null);
+  const sceneRef = useRef<any>(null);
+  const rendererRef = useRef<any>(null);
+  const gridRef = useRef<any>(null);
+  const particlesRef = useRef<any>(null);
+  const animationFrameRef = useRef<any>(null);
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });
 
   useEffect(() => {

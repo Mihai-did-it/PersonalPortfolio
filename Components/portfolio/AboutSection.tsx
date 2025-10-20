@@ -1,18 +1,28 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import ExperienceBackground from "../scenes/ExperienceBackground";
+import InteractiveStarfield from "../scenes/InteractiveStarfield";
+import FloatingAstronaut from "../scenes/FloatingAstronaut";
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
+  const astronautCanvasRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
 
   return (
-    <div ref={sectionRef} className="relative w-full h-full bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
-      {/* Three.js Background */}
-      <div className="absolute inset-0 z-0 opacity-50">
-        <ExperienceBackground 
+    <div ref={sectionRef} className="relative w-full min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950 flex items-center justify-center overflow-hidden">
+      {/* Three.js Interactive Background */}
+      <div className="absolute inset-0 z-0 opacity-60">
+        <InteractiveStarfield 
           canvasRef={canvasRef}
+          isInView={isInView}
+        />
+      </div>
+      
+      {/* Floating Astronaut */}
+      <div className="absolute inset-0 z-1 opacity-70 cursor-pointer">
+        <FloatingAstronaut 
+          canvasRef={astronautCanvasRef}
           isInView={isInView}
         />
       </div>
