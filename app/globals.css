@@ -33,7 +33,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar Styling */
+/* Custom Scrollbar Styling     WORKING*/
 /* For Webkit browsers (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
   width: 8px;
