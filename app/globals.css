@@ -142,7 +142,15 @@ body {
 
 /* Hero section background - keep gradient visible at top */
 .hero-section-bg {
-  background: linear-gradient(to bottom right, rgb(2, 6, 23), rgb(15, 23, 42), rgb(6, 78, 97));
+  background:
+    linear-gradient(
+      180deg,
+      rgba(34, 197, 214, 0.16) 0%,
+      rgba(13, 148, 136, 0.12) 28%,
+      rgba(4, 11, 26, 0.02) 60%,
+      rgba(4, 11, 26, 0) 100%
+    ),
+    #040b1a;
   padding-top: env(safe-area-inset-top, 0px); /* Content respects notch/dynamic island */
 }
 

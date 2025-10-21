@@ -12,17 +12,17 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
   const canvasRef = useRef(null);
 
   return (
-    <div className="relative w-full hero-section-bg py-32 sm:py-40 lg:py-48">
+    <div className="relative w-full min-h-dvh hero-section-bg overflow-hidden">
       {/* Three.js Background - Full coverage, no overflow */}
       <div className="absolute inset-0 z-0 opacity-50">
         <AnimatedGrid canvasRef={canvasRef} />
       </div>
 
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/55 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/10 via-transparent to-transparent z-0 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 pt-28 pb-28 sm:pt-36 sm:pb-32 lg:pt-44 lg:pb-40 text-center flex flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
