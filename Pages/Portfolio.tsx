@@ -10,11 +10,13 @@ import ContactSection from "../Components/portfolio/ContactSection";
 import ProgressBar from "../Components/portfolio/ProgressBar";
 import ProgressDots from "../Components/portfolio/ProgressDots";
 import TopNavigation from "../Components/portfolio/TopNavigation";
+import ResumeModal from "../Components/portfolio/ResumeModal";
 
 export default function Portfolio() {
   const containerRef = useRef<any>(null);
   const [activeSection, setActiveSection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const { scrollYProgress } = useScroll();
 
   // Detect mobile
@@ -100,48 +102,73 @@ export default function Portfolio() {
         activeSection={activeSection}
         onNavigate={navigateToSection}
         scrollProgress={scrollYProgress}
+        onResumeClick={() => setIsResumeModalOpen(true)}
       />
       <ProgressDots 
         sections={sections}
         activeSection={activeSection}
         onNavigate={navigateToSection}
       />
+      <ResumeModal 
+        isOpen={isResumeModalOpen} 
+        onClose={() => setIsResumeModalOpen(false)} 
+      />
 
       <div ref={containerRef} className="portfolio-container">
-        <div 
+        <motion.div 
           data-section="hero"
           className="portfolio-section"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <HeroSection />
-        </div>
+          <HeroSection onResumeClick={() => setIsResumeModalOpen(true)} />
+        </motion.div>
         
-        <div 
+        <motion.div 
           data-section="about"
           className="portfolio-section-scrollable"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <AboutSection />
-        </div>
+        </motion.div>
         
-        <div 
+        <motion.div 
           data-section="experience"
           className="portfolio-section-scrollable"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ExperienceSection />
-        </div>
+        </motion.div>
         
-        <div 
+        <motion.div 
           data-section="projects"
           className="portfolio-section-scrollable"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ProjectsSection />
-        </div>
+        </motion.div>
         
-        <div 
+        <motion.div 
           data-section="contact"
           className="portfolio-section-scrollable"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ContactSection />
-        </div>
+        </motion.div>
       </div>
     </>
   );

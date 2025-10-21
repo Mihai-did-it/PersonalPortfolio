@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, useTransform } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
-export default function TopNavigation({ sections, activeSection, onNavigate, scrollProgress }) {
+export default function TopNavigation({ sections, activeSection, onNavigate, scrollProgress, onResumeClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Transform scroll progress to control navbar size
@@ -97,7 +97,7 @@ export default function TopNavigation({ sections, activeSection, onNavigate, scr
               }`}
             >
               <a
-                href="https://github.com/mihailache"
+                href="https://github.com/Mihai-did-it"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-500/50 transition-all duration-300 hover:scale-110"
@@ -105,7 +105,7 @@ export default function TopNavigation({ sections, activeSection, onNavigate, scr
                 <Github className="w-4 h-4 text-slate-300" />
               </a>
               <a
-                href="https://linkedin.com/in/mihailache"
+                href="https://www.linkedin.com/in/mihai-l-8b91002b8/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-500/50 transition-all duration-300 hover:scale-110"
@@ -122,7 +122,7 @@ export default function TopNavigation({ sections, activeSection, onNavigate, scr
 
             {/* Resume Button */}
             <motion.button
-              onClick={() => window.open('/assets/NewGrad_October.pdf', '_blank')}
+              onClick={onResumeClick}
               className={`flex items-center gap-2 px-4 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-medium shadow-lg shadow-cyan-500/20 hover:shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105 ${
                 isScrolled ? 'py-2 text-sm' : 'py-2.5 text-base'
               }`}
