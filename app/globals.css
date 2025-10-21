@@ -140,12 +140,6 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* Contact section background - keep gradient visible, don't fade to transparent */
-.contact-section-bg {
-  background: linear-gradient(to bottom right, rgb(2, 6, 23), rgb(15, 23, 42), rgb(6, 78, 97));
-  padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); /* Content extends into safe area */
-}
-
 /* Hero section background - keep gradient visible at top */
 .hero-section-bg {
   background: linear-gradient(to bottom right, rgb(2, 6, 23), rgb(15, 23, 42), rgb(6, 78, 97));

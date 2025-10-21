@@ -25,7 +25,7 @@ export default function ContactSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full overflow-visible pt-16 sm:pt-20 md:pt-24 contact-section-bg"
+      className="relative w-full min-h-dvh h-auto overflow-visible py-12 sm:py-16 md:py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950"
     >
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
