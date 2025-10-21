@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import AnimatedGrid from "../scenes/AnimatedGrid";
+import ResumeModal from "./ResumeModal";
 
 export default function HeroSection() {
   const canvasRef = useRef(null);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <div className="relative w-full min-h-dvh hero-section-bg flex items-center justify-center overflow-hidden">
@@ -80,7 +82,7 @@ export default function HeroSection() {
               variant="outline" 
               size="lg"
               className="border-2 border-slate-600 hover:border-cyan-500 bg-slate-800/50 backdrop-blur-md hover:bg-slate-700/50 text-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-              onClick={() => window.open('/assets/NewGrad_October.pdf', '_blank')}
+              onClick={() => setIsResumeOpen(true)}
             >
               <FileText className="w-5 h-5 mr-2" />
               View Resume
@@ -95,7 +97,7 @@ export default function HeroSection() {
             transition={{ delay: 1.2, duration: 0.8 }}
           >
             <a 
-              href="https://github.com/mihailache" 
+              href="https://github.com/Mihai-did-it" 
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-md border border-slate-700 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-500 transition-all duration-300 hover:scale-110 shadow-md hover:shadow-lg hover:shadow-cyan-500/20"
@@ -103,7 +105,7 @@ export default function HeroSection() {
               <Github className="w-5 h-5 text-slate-300" />
             </a>
             <a 
-              href="https://linkedin.com/in/mihailache" 
+              href="https://www.linkedin.com/in/mihai-l-8b91002b8/" 
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full bg-slate-800/80 backdrop-blur-md border border-slate-700 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-500 transition-all duration-300 hover:scale-110 shadow-md hover:shadow-lg hover:shadow-cyan-500/20"
@@ -132,6 +134,9 @@ export default function HeroSection() {
           <ArrowDown className="w-5 h-5 md:w-6 md:h-6 text-cyan-500 mx-auto" />
         </div>
       </motion.div>
+
+      {/* Resume Modal */}
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </div>
   );
 }
