@@ -19,7 +19,7 @@ export default function AboutSection() {
   };
 
   return (
-    <div ref={sectionRef} className="relative w-full overflow-visible py-16 sm:py-20 md:py-24 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950">
+    <div ref={sectionRef} className="relative w-full overflow-visible py-16 sm:py-20 md:py-24">
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
         <InteractiveStarfield 

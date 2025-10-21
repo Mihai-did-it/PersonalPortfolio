@@ -154,33 +154,6 @@ body {
 
 /* Fixed background layer - removed, body has the background now */
 
-.portfolio-container {
-  width: 100%;
-  max-width: 100vw;
-  /* NO scroll-behavior, NO overflow control - let body scroll */
-  background: inherit;
-  min-height: auto;
-  position: relative;
-}
-
-/* Desktop: Container doesn't control scroll */
-@media (min-width: 769px) {
-  .portfolio-container {
-    min-height: auto;
-    overflow: visible;
-  }
-}
-
-/* Mobile: Container doesn't control scroll - body does */
-@media (max-width: 768px) {
-  .portfolio-container {
-    height: auto;
-    min-height: auto;
-    overflow: visible;
-    background: #020617 !important; /* Match notch color */
-  }
-}
-
 /* Prevent text size adjustment on mobile */
 @media screen and (max-width: 768px) {
   body {
@@ -201,100 +174,6 @@ body {
   html {
     font-size: 20px;
   }
-}
-
-.portfolio-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.portfolio-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.portfolio-container::-webkit-scrollbar-thumb {
-  background: rgba(6, 182, 212, 0.3);
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.portfolio-container::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.5);
-}
-
-.portfolio-section {
-  min-height: auto;
-  width: 100%;
-  max-width: 100vw;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: visible;
-}
-
-.portfolio-section-scrollable {
-  min-height: auto;
-  width: 100%;
-  max-width: 100vw;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: visible;
-}
-
-/* Mobile: NO scroll snap - sections just flow naturally */
-@media (max-width: 768px) {
-  .portfolio-section {
-    min-height: auto; /* Let content determine height */
-    height: auto;
-    overflow: visible;
-  }
-  
-  .portfolio-section-scrollable {
-    min-height: auto; /* Let content determine height */
-    height: auto;
-    overflow: visible;
-  }
-}
-
-.portfolio-section:not(:first-child)::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.portfolio-section-scrollable:not(:first-child)::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-  background-position: center center;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.portfolio-section-scrollable::-webkit-scrollbar {
-  width: 6px;
-}
-
-.portfolio-section-scrollable::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.portfolio-section-scrollable::-webkit-scrollbar-thumb {
-  background: rgba(6, 182, 212, 0.2);
-  border-radius: 3px;
-}
-
-.portfolio-section-scrollable::-webkit-scrollbar-thumb:hover {
-  background: rgba(6, 182, 212, 0.4);
 }
 
 @media (prefers-reduced-motion: reduce) {

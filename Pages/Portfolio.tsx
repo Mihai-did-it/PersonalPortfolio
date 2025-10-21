@@ -109,26 +109,26 @@ export default function Portfolio() {
         onClose={() => setIsResumeModalOpen(false)} 
       />
 
-      <div ref={containerRef} className="portfolio-container">
-        <div data-section="hero" className="portfolio-section">
+      <div ref={containerRef}>
+        <section data-section="hero">
           <HeroSection onResumeClick={() => setIsResumeModalOpen(true)} />
-        </div>
+        </section>
         
-        <div data-section="about" className="portfolio-section-scrollable">
+        <section data-section="about">
           <AboutSection />
-        </div>
+        </section>
         
-        <div data-section="experience" className="portfolio-section-scrollable">
+        <section data-section="experience">
           <ExperienceSection />
-        </div>
+        </section>
         
-        <div data-section="projects" className="portfolio-section-scrollable">
+        <section data-section="projects">
           <ProjectsSection />
-        </div>
+        </section>
         
-        <div data-section="contact" className="portfolio-section-scrollable">
+        <section data-section="contact">
           <ContactSection />
-        </div>
+        </section>
       </div>
     </>
   );
