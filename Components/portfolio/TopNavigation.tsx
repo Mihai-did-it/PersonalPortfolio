@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { motion, useTransform } from "framer-motion";
+import { motion, useTransform, MotionValue } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 
-export default function TopNavigation({ sections, activeSection, onNavigate, scrollProgress, onResumeClick }) {
+interface TopNavigationProps {
+  sections: { id: string; label: string }[];
+  activeSection: number;
+  onNavigate: (index: number) => void;
+  scrollProgress: MotionValue<number>;
+  onResumeClick: () => void;
+}
+
+export default function TopNavigation({ sections, activeSection, onNavigate, scrollProgress, onResumeClick }: TopNavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Transform scroll progress to control navbar size
@@ -24,11 +32,7 @@ export default function TopNavigation({ sections, activeSection, onNavigate, scr
         opacity: navOpacity
       }}
     >
-      <div className={`h-full backdrop-blur-xl transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-slate-900/80 border-b border-slate-800/50 shadow-lg shadow-cyan-500/5' 
-          : 'bg-slate-900/40 border-b border-slate-800/20'
-      }`}>
+      <div className="h-full transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           {/* Logo/Name */}
           <motion.button
