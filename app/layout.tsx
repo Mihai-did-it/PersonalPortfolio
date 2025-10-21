@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#0f172a', // Match the body background color
+  themeColor: '#020617', // Darkest color - matches notch area
 }
 
 export default function RootLayout({
@@ -24,13 +24,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" style={{ backgroundColor: '#0f172a' }}>
+    <html lang="en" style={{ backgroundColor: '#020617' }}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name="theme-color" content="#020617" />
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            color-scheme: dark;
+          }
+        `}} />
       </head>
-      <body className={inter.className} style={{ backgroundColor: '#0f172a' }}>
+      <body className={inter.className} style={{ backgroundColor: '#020617' }}>
         {children}
       </body>
     </html>
