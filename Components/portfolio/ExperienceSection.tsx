@@ -39,7 +39,7 @@ export default function ExperienceSection() {
   return (
     <div
       ref={sectionRef}
-      className="relative w-full min-h-dvh h-auto overflow-visible py-12 sm:py-16 md:py-20 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950"
+      className="relative w-full min-h-dvh h-auto overflow-visible py-12 sm:py-16 md:py-20 bg-[#040b1a]"
     >
       {/* Three.js Interactive Background */}
       <div className="absolute inset-0 z-0 opacity-60">
