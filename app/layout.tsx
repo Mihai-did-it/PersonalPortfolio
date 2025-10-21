@@ -29,13 +29,26 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="theme-color" content="#020617" />
+        <meta name="msapplication-TileColor" content="#020617" />
         <style dangerouslySetInnerHTML={{ __html: `
           :root {
             color-scheme: dark;
           }
+          html {
+            background-color: #020617 !important;
+          }
+          body {
+            background-color: #020617 !important;
+            padding-top: env(safe-area-inset-top);
+          }
+          @supports (padding: max(0px)) {
+            body {
+              padding-top: max(env(safe-area-inset-top), 0px);
+            }
+          }
         `}} />
       </head>
-      <body className={inter.className} style={{ backgroundColor: '#020617' }}>
+      <body className={inter.className}>
         {children}
       </body>
     </html>

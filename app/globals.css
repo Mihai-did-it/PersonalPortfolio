@@ -111,16 +111,12 @@ body {
 @media (max-width: 768px) {
   html, body {
     height: auto;
-    min-height: 200dvh; /* Enough height to trigger bar collapse */
-    overflow-y: scroll !important; /* Force scrollable */
+    min-height: 100vh; /* Enough height for scrolling */
+    overflow-y: auto; /* Normal scrolling */
     overflow-x: hidden;
     position: static;
     width: 100%;
     max-width: 100vw;
-    scroll-snap-type: none !important; /* NO SNAP ON MOBILE */
-    scroll-behavior: auto !important; /* Remove smooth scroll delay */
-    -webkit-overflow-scrolling: touch; /* Native momentum scrolling */
-    overscroll-behavior: none; /* Prevent bounce blocking scroll */
     /* Darkest color to match notch area */
     background: #020617 !important;
   }
@@ -182,8 +178,6 @@ body {
     min-height: auto;
     overflow: visible;
     background: #020617 !important; /* Match notch color */
-    scroll-snap-type: none !important;
-    scroll-snap-align: none !important;
   }
 }
 
@@ -265,34 +259,15 @@ body {
 /* Mobile: NO scroll snap - sections just flow naturally */
 @media (max-width: 768px) {
   .portfolio-section {
-    min-height: auto !important; /* Let content determine height */
-    height: auto !important;
-    overflow: visible !important;
-    /* Completely disable scroll snap and blocking */
-    scroll-snap-align: none !important;
-    scroll-snap-stop: unset !important;
-    scroll-snap-type: none !important;
-    overscroll-behavior: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+    min-height: auto; /* Let content determine height */
+    height: auto;
+    overflow: visible;
   }
   
   .portfolio-section-scrollable {
-    min-height: auto !important; /* Let content determine height */
-    height: auto !important;
-    overflow: visible !important;
-    /* Completely disable scroll snap and blocking */
-    scroll-snap-align: none !important;
-    scroll-snap-stop: unset !important;
-    scroll-snap-type: none !important;
-    overscroll-behavior: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  
-  /* Remove any scroll blocking from all elements */
-  * {
-    scroll-snap-type: none !important;
-    scroll-snap-align: none !important;
-    scroll-snap-stop: unset !important;
+    min-height: auto; /* Let content determine height */
+    height: auto;
+    overflow: visible;
   }
 }
 
