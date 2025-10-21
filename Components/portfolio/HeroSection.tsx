@@ -12,14 +12,14 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
   const canvasRef = useRef(null);
 
   return (
-    <div className="relative w-full min-h-dvh hero-section-bg flex items-center justify-center overflow-hidden">
+    <div className="relative w-full hero-section-bg py-32 sm:py-40 lg:py-48">
       {/* Three.js Background - Full coverage, no overflow */}
       <div className="absolute inset-0 z-0 opacity-50">
         <AnimatedGrid canvasRef={canvasRef} />
       </div>
 
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/60 z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/55 z-0 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
@@ -93,7 +93,7 @@ export default function HeroSection({ onResumeClick }: HeroSectionProps) {
 
           {/* Social Links */}
           <motion.div 
-            className="flex gap-4 md:gap-6 justify-center mt-8 md:mt-12 px-4"
+            className="flex gap-4 md:gap-6 justify-center mt-8 md:mt-12 px-4 pb-24"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
