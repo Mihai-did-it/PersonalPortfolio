@@ -15,10 +15,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#020617' },
-    { media: '(prefers-color-scheme: light)', color: '#020617' }
-  ],
+  themeColor: '#0f172a', // Match the body background color
 }
 
 export default function RootLayout({
@@ -27,12 +24,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" style={{ backgroundColor: '#0f172a' }}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="theme-color" content="#0f172a" />
       </head>
-      <body className={inter.className}>
+      <body className={inter.className} style={{ backgroundColor: '#0f172a' }}>
         {children}
       </body>
     </html>

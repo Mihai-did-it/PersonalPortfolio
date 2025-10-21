@@ -117,8 +117,10 @@ body {
     position: static;
     width: 100%;
     max-width: 100vw;
-    scroll-snap-type: none; /* NO SNAP ON MOBILE */
+    scroll-snap-type: none !important; /* NO SNAP ON MOBILE */
     scroll-behavior: smooth;
+    /* Solid background to prevent white gradient from Safari */
+    background: #0f172a !important;
   }
 }
 
@@ -177,6 +179,7 @@ body {
     height: auto;
     min-height: auto;
     overflow: visible;
+    background: #0f172a !important; /* Solid background on mobile */
   }
 }
 
@@ -258,21 +261,21 @@ body {
 /* Mobile: NO scroll snap - sections just flow naturally */
 @media (max-width: 768px) {
   .portfolio-section {
-    min-height: 100dvh;
+    min-height: auto; /* Let content determine height */
     height: auto;
     overflow: visible;
-    scroll-snap-align: unset;
-    scroll-snap-stop: normal;
-    /* NO scroll-snap-align on mobile */
+    /* Completely disable scroll snap */
+    scroll-snap-align: none !important;
+    scroll-snap-stop: unset !important;
   }
   
   .portfolio-section-scrollable {
-    min-height: 100dvh;
+    min-height: auto; /* Let content determine height */
     height: auto;
     overflow: visible;
-    scroll-snap-align: unset;
-    scroll-snap-stop: normal;
-    /* NO scroll-snap-align on mobile */
+    /* Completely disable scroll snap */
+    scroll-snap-align: none !important;
+    scroll-snap-stop: unset !important;
   }
 }
 
