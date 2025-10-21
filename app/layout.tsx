@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#020617', // Darkest color - matches notch areaasd
+  themeColor: '#020617', // Darkest color - matches notch areaasd scroll works now
 }
 
 export default function RootLayout({
