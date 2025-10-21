@@ -108,60 +108,40 @@ export default function Portfolio() {
       />
 
       <div ref={containerRef} className="portfolio-container">
-        <motion.div 
+        <div 
           data-section="hero"
           className="portfolio-section"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <HeroSection />
-        </motion.div>
+        </div>
         
-        <motion.div 
+        <div 
           data-section="about"
           className="portfolio-section-scrollable"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <AboutSection />
-        </motion.div>
+        </div>
         
-        <motion.div 
+        <div 
           data-section="experience"
           className="portfolio-section-scrollable"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ExperienceSection />
-        </motion.div>
+        </div>
         
-        <motion.div 
+        <div 
           data-section="projects"
           className="portfolio-section-scrollable"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ProjectsSection />
-        </motion.div>
+        </div>
         
-        <motion.div 
+        <div 
           data-section="contact"
           className="portfolio-section-scrollable"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <ContactSection />
-        </motion.div>
+        </div>
       </div>
     </>
   );
