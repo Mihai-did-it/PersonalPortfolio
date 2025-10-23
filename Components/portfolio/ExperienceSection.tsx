@@ -2,12 +2,10 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Briefcase, Calendar } from "lucide-react";
 import InteractiveStarfield from "../scenes/InteractiveStarfield";
-import FloatingAstronaut from "../scenes/FloatingAstronaut";
 
 export default function ExperienceSection() {
   const sectionRef = useRef(null);
   const canvasRef = useRef(null);
-  const astronautCanvasRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.3 });
   const [mousePos, setMousePos] = React.useState({ x: 50, y: 50 });
   const [hoveredExp, setHoveredExp] = React.useState<number | null>(null);
@@ -45,14 +43,6 @@ export default function ExperienceSection() {
       <div className="absolute inset-0 z-0 opacity-60">
         <InteractiveStarfield 
           canvasRef={canvasRef}
-          isInView={isInView}
-        />
-      </div>
-      
-      {/* Floating Astronaut */}
-      <div className="absolute inset-0 z-[1] opacity-70 cursor-pointer">
-        <FloatingAstronaut 
-          canvasRef={astronautCanvasRef}
           isInView={isInView}
         />
       </div>

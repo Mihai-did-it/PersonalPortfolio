@@ -11,6 +11,7 @@ import ProgressBar from "../Components/portfolio/ProgressBar";
 import ProgressDots from "../Components/portfolio/ProgressDots";
 import TopNavigation from "../Components/portfolio/TopNavigation";
 import ResumeModal from "../Components/portfolio/ResumeModal";
+import GearOverlay from "../Components/ui/GearOverlay";
 
 export default function Portfolio() {
   const containerRef = useRef<any>(null);
@@ -91,6 +92,7 @@ export default function Portfolio() {
 
   return (
     <>
+      <GearOverlay scrollProgress={scrollYProgress} />
       <ProgressBar progress={scrollYProgress} />
       <TopNavigation 
         sections={sections}

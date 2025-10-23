@@ -1,63 +1,68 @@
 import React from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
 
-interface SpinningGearsProps {
+interface GearOverlayProps {
   scrollProgress: MotionValue<number>;
-  size?: number;
 }
 
-export default function SpinningGears({ scrollProgress, size = 48 }: SpinningGearsProps) {
+export default function GearOverlay({ scrollProgress }: GearOverlayProps) {
   // Transform scroll progress to rotation degrees
   const rotation1 = useTransform(scrollProgress, [0, 1], [0, 360 * 3]);
   const rotation2 = useTransform(scrollProgress, [0, 1], [0, -360 * 3]); // Counter-clockwise
   const rotation3 = useTransform(scrollProgress, [0, 1], [0, 360 * 3]);
 
-  // Make gears bigger and fill more space
+  // Large overlay size
+  const size = 280;
   const gearSize1 = size * 0.55;
   const gearSize2 = size * 0.5;
   const gearSize3 = size * 0.45;
 
   return (
     <div 
-      className="relative flex items-center justify-center"
-      style={{ width: size, height: size }}
+      className="fixed inset-0 pointer-events-none z-30 flex items-center justify-center"
+      style={{ opacity: 0.15 }}
     >
-      {/* Gear 1 - Top Left */}
-      <motion.div
-        className="absolute"
-        style={{
-          left: '0%',
-          top: '8%',
-          rotate: rotation1,
-        }}
+      <div 
+        className="relative flex items-center justify-center"
+        style={{ width: size, height: size }}
       >
-        <Gear size={gearSize1} color="rgba(34, 211, 238, 0.95)" teeth={12} />
-      </motion.div>
+        {/* Gear 1 - Top Left */}
+        <motion.div
+          className="absolute"
+          style={{
+            left: '0%',
+            top: '8%',
+            rotate: rotation1,
+          }}
+        >
+          <Gear size={gearSize1} color="rgba(34, 211, 238, 0.95)" teeth={12} />
+        </motion.div>
 
-      {/* Gear 2 - Top Right */}
-      <motion.div
-        className="absolute"
-        style={{
-          right: '0%',
-          top: '5%',
-          rotate: rotation2,
-        }}
-      >
-        <Gear size={gearSize2} color="rgba(6, 182, 212, 0.9)" teeth={10} />
-      </motion.div>
+        {/* Gear 2 - Top Right */}
+        <motion.div
+          className="absolute"
+          style={{
+            right: '0%',
+            top: '5%',
+            rotate: rotation2,
+          }}
+        >
+          <Gear size={gearSize2} color="rgba(6, 182, 212, 0.9)" teeth={10} />
+        </motion.div>
 
-      {/* Gear 3 - Bottom Center */}
-      <motion.div
-        className="absolute"
-        style={{
-          bottom: '2%',
-          left: '50%',
-          translateX: '-50%',
-          rotate: rotation3,
-        }}
-      >
-        <Gear size={gearSize3} color="rgba(22, 189, 202, 0.85)" teeth={9} />
-      </motion.div>
+        {/* Gear 3 - Bottom Center */}
+        <motion.div
+          className="absolute"
+          style={{
+            bottom: '2%',
+            left: '50%',
+            translateX: '-50%',
+            rotate: rotation3,
+          }}
+        >
+          <Gear size={gearSize3} color="rgba(22, 189, 202, 0.85)" teeth={9} />
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -79,7 +84,7 @@ function Gear({ size, color, teeth = 12 }: GearProps) {
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
-      style={{ filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))' }}
+      style={{ filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))' }}
     >
       <defs>
         <linearGradient id={`gearGradient-${size}-${teeth}`} x1="0%" y1="0%" x2="100%" y2="100%">
