@@ -81,11 +81,11 @@ export default function Portfolio() {
     const target = sectionElements[index] as HTMLElement | undefined;
     if (!target) return;
 
-    // Instant scroll to section - no smooth behavior
+    // Smooth scroll to section
     const targetOffset = target.offsetTop;
     window.scrollTo({
       top: targetOffset,
-      behavior: "auto"
+      behavior: "smooth"
     });
   };
 
@@ -111,7 +111,10 @@ export default function Portfolio() {
 
       <div ref={containerRef}>
         <section data-section="hero">
-          <HeroSection onResumeClick={() => setIsResumeModalOpen(true)} />
+          <HeroSection 
+            onResumeClick={() => setIsResumeModalOpen(true)} 
+            onContactClick={() => navigateToSection(4)}
+          />
         </section>
         
         <section data-section="about">

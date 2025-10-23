@@ -1,18 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import AnimatedGrid from "../scenes/AnimatedGrid";
+import ResumeModal from "./ResumeModal";
 
-
-interface HeroSectionProps {
-  onResumeClick: () => void;
-  onContactClick?: () => void;
-}
-
-export default function HeroSection({ onResumeClick, onContactClick }: HeroSectionProps) {
+export default function HeroSection() {
   const canvasRef = useRef(null);
-
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   return (
     <div className="relative w-full min-h-dvh hero-section-bg flex items-center justify-center overflow-hidden">
@@ -78,7 +73,6 @@ export default function HeroSection({ onResumeClick, onContactClick }: HeroSecti
             <Button 
               size="lg"
               className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-xl shadow-cyan-500/20 hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 hover:scale-105 group w-full sm:w-auto"
-              onClick={onContactClick}
             >
               <Mail className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
               Get in Touch
@@ -88,7 +82,7 @@ export default function HeroSection({ onResumeClick, onContactClick }: HeroSecti
               variant="outline" 
               size="lg"
               className="border-2 border-slate-600 hover:border-cyan-500 bg-slate-800/50 backdrop-blur-md hover:bg-slate-700/50 text-slate-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-              onClick={onResumeClick}
+              onClick={() => setIsResumeOpen(true)}
             >
               <FileText className="w-5 h-5 mr-2" />
               View Resume
@@ -141,7 +135,8 @@ export default function HeroSection({ onResumeClick, onContactClick }: HeroSecti
         </div>
       </motion.div>
 
-
+      {/* Resume Modal */}
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </div>
   );
 }

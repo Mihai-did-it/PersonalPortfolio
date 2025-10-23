@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useTransform, MotionValue } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import SpinningGears from "../ui/SpinningGears";
 
 interface TopNavigationProps {
   sections: { id: string; label: string }[];
@@ -43,10 +44,11 @@ export default function TopNavigation({ sections, activeSection, onNavigate, scr
           >
             <div className={`relative transition-all duration-300 ${
               isScrolled ? 'w-10 h-10' : 'w-12 h-12'
-            } rounded-full bg-gradient-to-br from-cyan-500 to-cyan-600 flex items-center justify-center shadow-lg shadow-cyan-500/30`}>
-              <span className={`font-bold text-white transition-all duration-300 ${
-                isScrolled ? 'text-lg' : 'text-xl'
-              }`}>ML</span>
+            }`}>
+              <SpinningGears 
+                scrollProgress={scrollProgress} 
+                size={isScrolled ? 40 : 48}
+              />
             </div>
             <div>
               <h1 className={`font-bold text-slate-100 group-hover:text-cyan-400 transition-all duration-300 ${
