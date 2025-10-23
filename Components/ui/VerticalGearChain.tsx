@@ -1,73 +1,57 @@
 import React from "react";
 import { motion, MotionValue, useTransform } from "framer-motion";
 
-interface GearOverlayProps {
+interface VerticalGearChainProps {
   scrollProgress: MotionValue<number>;
-  activeSection?: number;
 }
 
-export default function GearOverlay({ scrollProgress, activeSection = 0 }: GearOverlayProps) {
-  // Transform scroll progress to rotation degrees
+export default function VerticalGearChain({ scrollProgress }: VerticalGearChainProps) {
+  // Alternating rotations for interlocking effect
   const rotation1 = useTransform(scrollProgress, [0, 1], [0, 360 * 3]);
-  const rotation2 = useTransform(scrollProgress, [0, 1], [0, -360 * 3]); // Counter-clockwise
-  const rotation3 = useTransform(scrollProgress, [0, 1], [0, 360 * 3]);
+  const rotation2 = useTransform(scrollProgress, [0, 1], [0, -360 * 3]);
 
-  // Hide on hero section (section 0)
-  if (activeSection === 0) {
-    return null;
-  }
+  const gearSize = 35; // Smaller gears for a more refined look
 
-  // Large overlay size - same proportions as menu
-  const size = 280;
-  const gearSize1 = size * 0.55;
-  const gearSize2 = size * 0.5;
-  const gearSize3 = size * 0.45;
+  // Create array of gears positions - more gears with tighter spacing
+  const numGears = 25; // More gears to span the full height
+  const spacing = 38; // Tighter spacing between gears
 
   return (
-    <div 
-      className="fixed inset-0 pointer-events-none z-30 flex items-center justify-center"
-      style={{ opacity: 0.08 }}
-    >
-      <div 
-        className="relative flex items-center justify-center"
-        style={{ width: size, height: size }}
-      >
-        {/* Gear 1 - Top Left (same as menu) */}
-        <motion.div
-          className="absolute"
-          style={{
-            left: '0%',
-            top: '8%',
-            rotate: rotation1,
-          }}
-        >
-          <Gear size={gearSize1} color="rgba(34, 211, 238, 0.95)" teeth={12} />
-        </motion.div>
+    <div className="fixed left-6 top-0 z-20 pointer-events-none hidden md:block">
+      <div className="relative" style={{ width: gearSize + 40, height: '100vh' }}>
+        {/* Vertical connecting line */}
+        <div
+          className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/40 via-cyan-500/20 to-cyan-500/10"
+          style={{ transform: 'translateX(-50%)' }}
+        />
 
-        {/* Gear 2 - Top Right (same as menu) */}
-        <motion.div
-          className="absolute"
-          style={{
-            right: '0%',
-            top: '5%',
-            rotate: rotation2,
-          }}
-        >
-          <Gear size={gearSize2} color="rgba(6, 182, 212, 0.9)" teeth={10} />
-        </motion.div>
-
-        {/* Gear 3 - Bottom Center (same as menu) */}
-        <motion.div
-          className="absolute"
-          style={{
-            bottom: '2%',
-            left: '50%',
-            translateX: '-50%',
-            rotate: rotation3,
-          }}
-        >
-          <Gear size={gearSize3} color="rgba(22, 189, 202, 0.85)" teeth={9} />
-        </motion.div>
+        {/* Render gears vertically with staggered positions */}
+        {Array.from({ length: numGears }).map((_, index) => {
+          const topPosition = index * spacing;
+          const isEven = index % 2 === 0;
+          
+          // Stagger gears left and right alternating
+          const horizontalOffset = isEven ? -8 : 8;
+          
+          return (
+            <motion.div
+              key={index}
+              className="absolute"
+              style={{
+                left: '50%',
+                top: topPosition,
+                translateX: `calc(-50% + ${horizontalOffset}px)`,
+                rotate: isEven ? rotation1 : rotation2,
+              }}
+            >
+              <Gear 
+                size={gearSize} 
+                color={isEven ? "rgba(34, 211, 238, 0.85)" : "rgba(6, 182, 212, 0.8)"} 
+                teeth={isEven ? 12 : 10} 
+              />
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
@@ -90,7 +74,7 @@ function Gear({ size, color, teeth = 12 }: GearProps) {
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
-      style={{ filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.6))' }}
+      style={{ filter: 'drop-shadow(0 0 6px rgba(34, 211, 238, 0.5))' }}
     >
       <defs>
         <linearGradient id={`gearGradient-${size}-${teeth}`} x1="0%" y1="0%" x2="100%" y2="100%">

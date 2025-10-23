@@ -8,7 +8,7 @@ import ExperienceSection from "../Components/portfolio/ExperienceSection";
 import ProjectsSection from "../Components/portfolio/ProjectsSection";
 import ContactSection from "../Components/portfolio/ContactSection";
 import ProgressBar from "../Components/portfolio/ProgressBar";
-import ProgressDots from "../Components/portfolio/ProgressDots";
+import GearProgress from "../Components/portfolio/GearProgress";
 import TopNavigation from "../Components/portfolio/TopNavigation";
 import ResumeModal from "../Components/portfolio/ResumeModal";
 import GearOverlay from "../Components/ui/GearOverlay";
@@ -92,7 +92,7 @@ export default function Portfolio() {
 
   return (
     <>
-      <GearOverlay scrollProgress={scrollYProgress} />
+      <GearOverlay scrollProgress={scrollYProgress} activeSection={activeSection} />
       <ProgressBar progress={scrollYProgress} />
       <TopNavigation 
         sections={sections}
@@ -101,10 +101,11 @@ export default function Portfolio() {
         scrollProgress={scrollYProgress}
         onResumeClick={() => setIsResumeModalOpen(true)}
       />
-      <ProgressDots 
+      <GearProgress 
         sections={sections}
         activeSection={activeSection}
         onNavigate={navigateToSection}
+        scrollProgress={scrollYProgress}
       />
       <ResumeModal 
         isOpen={isResumeModalOpen} 
