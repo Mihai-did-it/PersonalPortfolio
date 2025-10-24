@@ -57,12 +57,10 @@ export default function AboutSection() {
                 <p>
                   I'm a Computer Science B.S graduate from UC Santa Cruz. I'm passionate about building systems that scale. My journey spans from backend architecture to full-stack development, with a focus on data engineering and cloud infrastructure.
                 </p>
-                <p>
-                  Currently enrolled in a Masters program in AI/ML at Maastricht University (expected 2027) and gained international perspective through study abroad at the University of Tokyo.
-                </p>
-                <p>
-                  I write code with design in mind, aiming for software that’s efficient, intuitive, and clear.
-                </p>
+<p>
+  I’m currently pursuing a Master’s in Artificial Intelligence and Machine Learning at Maastricht University (expected 2027), where I’m exploring how data driven systems and intelligent models can make technology smarter and more adaptable.
+</p>
+
               </motion.div>
             </div>
           </motion.div>

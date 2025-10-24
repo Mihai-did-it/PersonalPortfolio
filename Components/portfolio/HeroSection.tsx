@@ -66,7 +66,7 @@ export default function HeroSection({ onResumeClick, onContactClick }: HeroSecti
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            U.S Citizen
+          Master's Student & U.S Citizen
           </motion.p>
 
           <motion.div 
